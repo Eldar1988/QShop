@@ -52,7 +52,7 @@ import utils from 'src/utils'
 import { mapActions } from 'vuex'
 
 export default {
-  name: 'login-form',
+  name: 'register-form',
   data () {
     return {
       passwordVisible: false,
@@ -64,12 +64,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions('user', ['login']),
+    ...mapActions('user', ['register']),
     async loginFormSubmit () {
       this.loading = true
       const valid = !utils.emptyDataValidator(Object.values(this.formData))
       if (valid) {
-        await this.login(this.formData)
+        await this.register(this.formData)
       } else {
         utils.notifier('Не все поля формы заполнены.')
       }

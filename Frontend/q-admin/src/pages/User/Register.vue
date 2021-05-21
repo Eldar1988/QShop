@@ -1,12 +1,14 @@
 <template>
-<q-page>
-  Reg
+<q-page class="flex flex-center">
+  <register-form />
 </q-page>
 </template>
 
 <script>
+import RegisterForm from 'components/user/register-form'
 export default {
-  name: 'Register'
+  name: 'Register',
+  components: { RegisterForm }
 }
 </script>
 
