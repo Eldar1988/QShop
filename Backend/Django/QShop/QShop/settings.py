@@ -26,7 +26,8 @@ INSTALLED_APPS = [
     'easy_thumbnails',
 
     'seller',
-    'shop'
+    'shop',
+    'reviews'
 ]
 
 MIDDLEWARE = [

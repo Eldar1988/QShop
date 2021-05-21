@@ -19,7 +19,7 @@ class Seller(models.Model):
     name = models.CharField(max_length=255)
     tariff = models.ForeignKey(Tariff, on_delete=models.SET_NULL, null=True, blank=True, related_name='sellers')
     active = models.BooleanField(default=True)
-    user_id = models.CharField(max_length=255, db_index=True)
+    uid = models.CharField(max_length=255, db_index=True)
     phone = models.CharField(max_length=20, null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
     balance = models.DecimalField(max_digits=12, decimal_places=2, default=2000)
@@ -36,6 +36,7 @@ class Seller(models.Model):
 
 
 class SellerShop(models.Model):
+    uid = models.CharField(max_length=255)
     user = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name='shops')
     title = models.CharField(max_length=255, db_index=True)
     description = models.TextField()
