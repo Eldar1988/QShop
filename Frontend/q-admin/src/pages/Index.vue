@@ -1,14 +1,14 @@
 <template>
-  <q-page class="flex flex-center">
-    <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-full.svg"
-    >
+  <q-page class="">
+    <base-section-title title="Ваши магазины" />
+
   </q-page>
 </template>
 
 <script>
+import BaseSectionTitle from 'components/base-section-title'
 export default {
-  name: 'PageIndex'
+  name: 'PageIndex',
+  components: { BaseSectionTitle }
 }
 </script>

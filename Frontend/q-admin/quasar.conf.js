@@ -75,6 +75,7 @@ module.exports = function (/* ctx */) {
     devServer: {
       https: false,
       port: 8080,
+      host: '192.168.0.199',
       open: true // opens browser window automatically
     },
 
@@ -99,7 +100,7 @@ module.exports = function (/* ctx */) {
       // Quasar plugins
       plugins: [
         'Notify',
-        'Loading'
+        'Loading',
       ]
     },
 
