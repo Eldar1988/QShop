@@ -41,9 +41,6 @@
         <p class="text-subtitle1">Нет аккаунта? <router-link to="/register">Регистрация</router-link></p>
       </div>
     </q-card-section>
-    <q-card-section class="q-px-lg">
-
-    </q-card-section>
   </q-card>
 </template>
 

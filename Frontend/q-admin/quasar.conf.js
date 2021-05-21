@@ -75,8 +75,8 @@ module.exports = function (/* ctx */) {
     devServer: {
       https: false,
       port: 8080,
-      host: '192.168.0.199',
-      // host: '192.168.0.156',
+      // host: '192.168.0.199',
+      host: '192.168.0.156',
       open: true // opens browser window automatically
     },
 
@@ -107,7 +107,10 @@ module.exports = function (/* ctx */) {
 
     // animations: 'all', // --- includes all animations
     // https://v1.quasar.dev/options/animations
-    animations: [],
+    animations: [
+      'fadeIn',
+      'fadeOut'
+    ],
 
     // https://v1.quasar.dev/quasar-cli/developing-ssr/configuring-ssr
     ssr: {

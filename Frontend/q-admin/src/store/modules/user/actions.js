@@ -1,5 +1,6 @@
 import firebase from 'firebase/app'
 import utils from 'src/utils'
+import axios from 'axios'
 
 export async function login ({ commit, dispatch }, payload) {
   try {
@@ -15,7 +16,7 @@ export async function login ({ commit, dispatch }, payload) {
   }
 }
 
-export async function register ({ commit, state }, payload) {
+export async function register ({ commit }, payload) {
   try {
     await firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
     const newUser = firebase.auth().currentUser
@@ -25,6 +26,15 @@ export async function register ({ commit, state }, payload) {
       utils.notifier('Регистрация прошла успешно.', 'positive')
     }
   } catch (e) {
+    console.log(e.code)
     utils.notifier(utils.firebaseErrorTranslator(e.code) || e.message)
+  }
+}
+
+export async function loadSeller ({ commit }) {
+  try {
+    await axios.get()
+  } catch (e) {
+    utils.notifier(e.message)
   }
 }
