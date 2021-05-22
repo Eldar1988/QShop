@@ -27,6 +27,7 @@ class Category(models.Model):
 
 class Brand(models.Model):
     uid = models.CharField(max_length=255)
+    shop = models.ForeignKey(SellerShop, on_delete=models.SET_NULL, null=True, blank=True, related_name='brands')
     title = models.CharField(max_length=255, db_index=True)
     shop = models.ForeignKey(SellerShop, on_delete=models.SET_NULL, null=True, blank=True, related_name='brands')
     description = models.TextField(null=True, blank=True)
@@ -43,6 +44,8 @@ class Brand(models.Model):
 
 class CharacteristicType(models.Model):
     uid = models.CharField(max_length=255)
+    shop = models.ForeignKey(SellerShop, on_delete=models.SET_NULL, null=True, blank=True,
+                             related_name='characteristic_types')
     title = models.CharField(max_length=255)
     category = models.ManyToManyField(Category, blank=True, related_name='characteristic_types')
     order = models.PositiveSmallIntegerField(null=True, blank=True)
@@ -56,6 +59,8 @@ class CharacteristicType(models.Model):
 
 class Characteristic(models.Model):
     uid = models.CharField(max_length=255)
+    shop = models.ForeignKey(SellerShop, on_delete=models.SET_NULL, null=True, blank=True,
+                             related_name='characteristics')
     type = models.ForeignKey(CharacteristicType, on_delete=models.SET_NULL, null=True, blank=True,
                              related_name='characteristics')
     value = models.CharField(max_length=255)
@@ -67,6 +72,7 @@ class Characteristic(models.Model):
 
 class Product(models.Model):
     uid = models.CharField(max_length=255)
+    shop = models.ForeignKey(SellerShop, on_delete=models.SET_NULL, null=True, blank=True, related_name='products')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name='products')
     brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True, blank=True, related_name='products')
     characteristics = models.ManyToManyField(Characteristic, blank=True, related_name='products')

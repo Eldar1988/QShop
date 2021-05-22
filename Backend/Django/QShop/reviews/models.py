@@ -1,5 +1,6 @@
 from django.db import models
 from shop.models import Product
+from seller.models import SellerShop
 
 
 class Review(models.Model):

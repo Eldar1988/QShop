@@ -6,8 +6,8 @@ export async function login ({ commit, dispatch }, payload) {
   try {
     await firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
     const currentUser = firebase.auth().currentUser
+    debugger
     if (currentUser) {
-      commit('mutationsUser', currentUser)
       localStorage.setItem('uid', currentUser.uid)
       utils.notifier('Авторизация прошла успешно.', 'positive')
     }
