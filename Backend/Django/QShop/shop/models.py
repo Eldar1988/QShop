@@ -13,9 +13,9 @@ class Category(models.Model):
     label = models.CharField(null=True, blank=True, max_length=255)
     description = models.TextField(null=True, blank=True)
     image = ThumbnailerImageField(upload_to=utils.path_and_rename('shop/categories/', 'image'),
-                                  resize_source={'size': (200, 200), 'crop': 'scale'})
+                                  resize_source={'size': (200, 200), 'crop': 'scale'}, null=True, blank=True)
     miniature = ThumbnailerImageField(upload_to=utils.path_and_rename('shop/categories/', 'image'),
-                                      resize_source={'size': (200, 200), 'crop': 'scale'})
+                                      resize_source={'size': (200, 200), 'crop': 'scale'}, null=True, blank=True)
     order = models.PositiveSmallIntegerField(null=True, blank=True)
 
     def __str__(self):
@@ -26,13 +26,13 @@ class Category(models.Model):
 
 
 class Brand(models.Model):
-    uid = models.CharField(max_length=255)
+    uid = models.CharField(max_length=255, null=True, blank=True)
     shop = models.ForeignKey(SellerShop, on_delete=models.SET_NULL, null=True, blank=True, related_name='brands')
     title = models.CharField(max_length=255, db_index=True)
     shop = models.ForeignKey(SellerShop, on_delete=models.SET_NULL, null=True, blank=True, related_name='brands')
     description = models.TextField(null=True, blank=True)
     logo = ThumbnailerImageField(upload_to=utils.path_and_rename('shop/brands/', 'logo'),
-                                 resize_source={'size': (200, 200), 'crop': 'scale'})
+                                 resize_source={'size': (200, 200), 'crop': 'scale'}, null=True, blank=True)
     order = models.PositiveSmallIntegerField(null=True, blank=True)
 
     def __str__(self):
@@ -111,6 +111,8 @@ class Product(models.Model):
 
 class VariationType(models.Model):
     uid = models.CharField(max_length=255)
+    shop = models.ForeignKey(SellerShop, on_delete=models.SET_NULL, null=True, blank=True,
+                             related_name='variation_types')
     title = models.CharField(max_length=255)
     order = models.PositiveSmallIntegerField(null=True, blank=True)
 
@@ -123,6 +125,7 @@ class VariationType(models.Model):
 
 class Variation(models.Model):
     uid = models.CharField(max_length=255)
+    shop = models.ForeignKey(SellerShop, on_delete=models.SET_NULL, null=True, blank=True, related_name='variations')
     type = models.ForeignKey(VariationType, on_delete=models.SET_NULL, related_name='variations', null=True, blank=True)
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True, related_name='variations')
     value = models.CharField(max_length=255)
@@ -138,6 +141,7 @@ class Variation(models.Model):
 
 class ProductImage(models.Model):
     uid = models.CharField(max_length=255)
+    shop = models.ForeignKey(SellerShop, on_delete=models.SET_NULL, null=True, blank=True, related_name='images')
     image = ThumbnailerImageField(upload_to=utils.path_and_rename('shop/products/images/', 'image'),
                                   null=True, blank=True, resize_source={'size': (1000, 1000), 'crop': 'scale'})
     image_url = models.URLField(null=True, blank=True)

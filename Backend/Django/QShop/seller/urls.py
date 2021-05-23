@@ -3,5 +3,6 @@ from . import views
 
 
 urlpatterns = [
-    path('seller_detail/<user_id>/', views.SellerDetailView.as_view())
+    path('get_seller/<uid>/', views.SellerDetailView.as_view()),
+    path('create_seller/', views.SellerCreateView.as_view())
 ]

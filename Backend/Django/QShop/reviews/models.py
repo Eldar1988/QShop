@@ -15,4 +15,4 @@ class Review(models.Model):
         return self.name
 
     class Meta:
-        ordering = ('-pub_date',)
+        ordering = ('-date',)

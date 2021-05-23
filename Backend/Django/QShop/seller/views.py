@@ -6,6 +6,11 @@ from .serializers import SellerSerializer, SellerShopSerializer
 class SellerDetailView(generics.RetrieveAPIView):
     """Get seller detail by user_id"""
     queryset = Seller.objects.all()
-    lookup_field = 'user_id'
+    lookup_field = 'uid'
     serializer_class = SellerSerializer
 
+
+class SellerCreateView(generics.CreateAPIView):
+    """Create seller"""
+    queryset = Seller.objects.all()
+    serializer_class = SellerSerializer

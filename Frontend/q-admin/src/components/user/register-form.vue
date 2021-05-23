@@ -8,18 +8,24 @@
       <p>Мы рады, что вы решили к нам присоединиться!</p>
     </q-card-section>
     <q-card-section class="q-px-lg">
+<!--      Email input-->
       <q-input
         v-model="formData.email"
         label="Email"
-        type="email">
+        type="email"
+        @keyup.enter.native="registerFormSubmit"
+      >
         <template v-slot:prepend>
           <q-icon name="alternate_email" />
         </template>
       </q-input>
+<!--      Password input-->
       <q-input
         v-model="formData.password"
         label="Пароль"
-        :type="!passwordVisible ? 'password' : 'text'">
+        :type="!passwordVisible ? 'password' : 'text'"
+        @keyup.enter.native="registerFormSubmit"
+      >
         <template v-slot:prepend>
           <q-icon name="vpn_key" />
         </template>
@@ -30,10 +36,13 @@
             @click.passive="passwordVisible = !passwordVisible"/>
         </template>
       </q-input>
+<!--      Password submit input-->
       <q-input
         v-model="formData.passwordConfirm"
         label="Пароль еще раз"
-        :type="!passwordVisible ? 'password' : 'text'">
+        :type="!passwordVisible ? 'password' : 'text'"
+        @keyup.enter.native="registerFormSubmit"
+      >
         <template v-slot:prepend>
           <q-icon name="vpn_key" />
         </template>
@@ -44,13 +53,14 @@
             @click.passive="passwordVisible = !passwordVisible"/>
         </template>
       </q-input>
+<!--      Submit button-->
       <q-btn
         unelevated
         label="Регистрация"
         color="primary"
         class="full-width q-py-sm q-mt-lg"
         :loading="loading"
-        @click="loginFormSubmit"
+        @click="registerFormSubmit"
       />
       <div class="q-mt-lg">
         <p class="text-subtitle1">Есть аккаунт? <router-link to="/login">Вход</router-link></p>
@@ -61,10 +71,13 @@
 
 <script>
 import utils from 'src/utils'
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'register-form',
+  computed: {
+    ...mapState('user', ['seller'])
+  },
   data () {
     return {
       passwordVisible: false,
@@ -78,20 +91,26 @@ export default {
   },
   methods: {
     ...mapActions('user', ['register']),
-    async loginFormSubmit () {
-      this.loading = true
+    async registerFormSubmit () {
+      const vm = this
+      vm.loading = true
       const valid = !utils.emptyDataValidator(Object.values(this.formData))
       if (valid) {
-        const passwordsEquality = utils.equalityTest(this.formData.password, this.formData.passwordConfirm)
+        const passwordsEquality = utils.equalityTest(vm.formData.password, vm.formData.passwordConfirm)
         if (passwordsEquality) {
-          await this.register(this.formData)
+          await vm.register(vm.formData)
+          if (vm.seller.uid) {
+            await vm.$router.push({
+              path: '/'
+            })
+          }
         } else {
           utils.notifier('Пароли не совпадают. Пожалуйста, будьте внимательнее.')
         }
       } else {
         utils.notifier('Не все поля формы заполнены.')
       }
-      this.loading = false
+      vm.loading = false
     }
   }
 }

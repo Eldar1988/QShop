@@ -7,18 +7,24 @@
       <h2>Вход</h2>
     </q-card-section>
     <q-card-section class="q-px-lg">
+<!--      Email input-->
       <q-input
         v-model="formData.email"
         label="Email"
-        type="email">
+        type="email"
+        @keyup.enter.native="loginFormSubmit"
+      >
         <template v-slot:prepend>
           <q-icon name="alternate_email" />
         </template>
       </q-input>
+<!--      Password input-->
       <q-input
         v-model="formData.password"
         label="Пароль"
-        :type="!passwordVisible ? 'password' : 'text'">
+        :type="!passwordVisible ? 'password' : 'text'"
+        @keyup.enter.native="loginFormSubmit"
+      >
         <template v-slot:prepend>
           <q-icon name="vpn_key" />
         </template>
@@ -29,6 +35,7 @@
             @click.passive="passwordVisible = !passwordVisible"/>
         </template>
       </q-input>
+<!--      Submit button-->
       <q-btn
         unelevated
         label="Вход"
@@ -46,10 +53,13 @@
 
 <script>
 import utils from 'src/utils'
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'login-form',
+  computed: {
+    ...mapState('user', ['seller'])
+  },
   data () {
     return {
       passwordVisible: false,
@@ -67,6 +77,11 @@ export default {
       const valid = !utils.emptyDataValidator(Object.values(this.formData))
       if (valid) {
         await this.login(this.formData)
+        if (this.seller) {
+          await this.$router.replace({
+            path: '/'
+          })
+        }
       } else {
         utils.notifier('Не все поля формы заполнены.')
       }

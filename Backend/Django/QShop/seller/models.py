@@ -16,7 +16,7 @@ class Tariff(models.Model):
 
 
 class Seller(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, null=True, blank=True)
     tariff = models.ForeignKey(Tariff, on_delete=models.SET_NULL, null=True, blank=True, related_name='sellers')
     active = models.BooleanField(default=True)
     uid = models.CharField(max_length=255, db_index=True)
@@ -29,14 +29,16 @@ class Seller(models.Model):
     update = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        if self.name:
+            return self.name
+        return self.uid
 
     class Meta:
         ordering = ('-register_date',)
 
 
 class SellerShop(models.Model):
-    uid = models.CharField(max_length=255)
+    uid = models.CharField(max_length=255, null=True, blank=True)
     user = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name='shops')
     title = models.CharField(max_length=255, db_index=True)
     description = models.TextField()

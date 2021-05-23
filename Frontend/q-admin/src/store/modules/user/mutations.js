@@ -1,3 +1,3 @@
-export function mutationsUser (state, data) {
-  state.user = data
+export function mutationsSeller (state, data) {
+  state.seller = data
 }

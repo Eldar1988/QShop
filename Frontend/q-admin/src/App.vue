@@ -6,22 +6,27 @@
 <script>
 import configs from 'src/configs'
 import firebase from 'firebase'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'App',
   created () {
+    configs.localStorageConfig()
+    const uid = localStorage.getItem('uid')
     firebase.initializeApp(configs.firebaseConfig)
     if (localStorage.getItem('darkThemeIsActive') === 'true') {
       this.$q.dark.set(true)
     }
-    if (!localStorage.getItem('uid')) {
+    if (!uid) {
       this.$router.replace({
         path: '/login'
       })
+    } else {
+      this.loadSeller(uid)
     }
   },
-  beforeCreate () {
-    configs.localStorageConfig()
+  methods: {
+    ...mapActions('user', ['loadSeller'])
   }
 }
 </script>

@@ -6,10 +6,12 @@ Vue.use(Vuex)
 
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
+    state: {
+      serverURL: 'http://192.168.0.199:8000'
+    },
     modules: {
       user
-    },
-    strict: true
+    }
   })
 
   return Store

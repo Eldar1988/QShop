@@ -21,6 +21,14 @@ const routes = [
       { path: '', component: () => import('pages/User/Register') }
     ]
   },
+  {
+    path: '/profile/',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', redirect: '/profile/info' },
+      { path: ':tab', component: () => import('pages/User/Profile') }
+    ]
+  },
 
   // Always leave this as last one,
   // but you can also remove it

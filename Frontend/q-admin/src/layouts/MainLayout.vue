@@ -43,7 +43,7 @@
 
 <script>
 
-import RightPanel from 'components/header/right-panel'
+import RightPanel from 'components/header/right-panel/right-panel'
 import BaseDrawerContent from 'components/base-drawer/base-drawer-content'
 
 export default {
