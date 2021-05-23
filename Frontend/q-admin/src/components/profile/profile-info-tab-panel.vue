@@ -2,22 +2,14 @@
   <div>
     <q-list separator class="rounded-borders">
       <!--      Name-->
-      <q-item clickable v-ripple>
+      <q-item>
         <q-item-section avatar top>
           <q-avatar icon="person" color="primary" text-color="white"/>
         </q-item-section>
         <q-item-section>
           <q-item-label lines="1">Имя</q-item-label>
           <q-item-label caption>
-            <q-input
-              v-model="seller.name"
-              :disable="nameInputDisable"
-              borderless dense
-              maxlength="255"
-              class=""
-              style="max-height: 30px; margin-top: -10px"
-              @click="nameInputDisable = !nameInputDisable"
-            />
+            {{ seller.name || 'Anonim' }}
           </q-item-label>
         </q-item-section>
         <q-item-section side>
@@ -26,13 +18,14 @@
             dense unelevated
             size="sm"
             color="grey-7"
+            @click="changeProfileDialog = true"
           >
             <q-tooltip>Изменить</q-tooltip>
           </q-btn>
         </q-item-section>
       </q-item>
       <!--      Phone-->
-      <q-item clickable v-ripple>
+      <q-item>
         <q-item-section avatar top>
           <q-avatar icon="phone" color="primary" text-color="white"/>
         </q-item-section>
@@ -46,47 +39,43 @@
             dense unelevated
             size="sm"
             color="grey-7"
+            @click="changeProfileDialog = true"
           >
             <q-tooltip>Изменить</q-tooltip>
           </q-btn>
         </q-item-section>
       </q-item>
       <!--      Email-->
-      <q-item clickable v-ripple>
+      <q-item>
         <q-item-section avatar top>
           <q-avatar icon="email" color="primary" text-color="white"/>
         </q-item-section>
         <q-item-section>
-          <q-item-label lines="1">Email</q-item-label>
+          <q-item-label lines="1">E-mail</q-item-label>
           <q-item-label caption>{{ seller.email }}</q-item-label>
-        </q-item-section>
-        <q-item-section side>
-          <q-btn
-            icon="edit"
-            dense unelevated
-            size="sm"
-            color="grey-7"
-          >
-            <q-tooltip>Изменить</q-tooltip>
-          </q-btn>
         </q-item-section>
       </q-item>
     </q-list>
+<!--    Change profile dialog-->
+    <q-dialog v-model="changeProfileDialog">
+      <change-profile-form />
+    </q-dialog>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import ChangeProfileForm from 'components/profile/change-profile-form'
 
 export default {
   name: 'profile-info-tab-panel',
+  components: { ChangeProfileForm },
   computed: {
     ...mapState('user', ['seller'])
   },
   data () {
     return {
-      nameInputDisable: false,
-      name: this.seller.name
+      changeProfileDialog: false
     }
   }
 }

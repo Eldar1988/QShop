@@ -49,3 +49,18 @@ export async function loadSeller ({ commit }, uid) {
     utils.notifier(e.message)
   }
 }
+
+export async function updateSeller ({ commit }, payload) {
+  try {
+    await axios.patch(`${this.state.serverURL}/seller/update_seller/${payload.uid}/`, {
+      name: payload.name,
+      phone: payload.phone
+    })
+      .then(response => {
+        commit('mutationsSeller', response.data)
+        utils.notifier('Профиль изменен.', 'positive')
+      })
+  } catch (e) {
+    utils.notifier(e.message)
+  }
+}

@@ -1,8 +1,8 @@
 <template>
-  <div class="profile">
+  <div v-if="seller" class="profile">
     <q-btn round flat>
       <q-avatar size="26px">
-        <img v-if="seller.avatar" :src="seller.avatar">
+        <img v-if="seller.avatar" :src="seller.avatar" style="object-fit: cover" />
         <q-icon v-else name="person" color="grey-7"/>
       </q-avatar>
       <q-tooltip>Профиль</q-tooltip>
@@ -19,7 +19,7 @@
           <div class="column flex justify-center full-width text-center">
             <!--            Profile-->
             <q-avatar size="72px" class="q-mx-auto">
-              <img v-if="seller.avatar" :src="seller.avatar">
+              <img v-if="seller.avatar" :src="seller.avatar" style="object-fit: cover">
               <q-icon v-else name="person" color="grey-7"/>
             </q-avatar>
             <div class="q-mt-md q-mb-xs text-center text-bold">{{ seller.name }}</div>

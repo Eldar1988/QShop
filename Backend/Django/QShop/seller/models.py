@@ -1,4 +1,6 @@
 from django.db import models
+from easy_thumbnails.fields import ThumbnailerImageField
+from QShop.settings import SHOP_UTILS as utils
 
 
 class Seller(models.Model):
@@ -10,7 +12,8 @@ class Seller(models.Model):
     email = models.EmailField(null=True, blank=True)
     balance = models.DecimalField(max_digits=12, decimal_places=2, default=2000)
     mailing = models.BooleanField(default=False)
-    avatar = models.ImageField(null=True, blank=True, upload_to='seller/avatars/')
+    avatar = ThumbnailerImageField(upload_to=utils.path_and_rename('shop/products/miniatures/', 'miniature'),
+                                      null=True, blank=True, resize_source={'size': (300, 300), 'crop': 'scale'})
     register_date = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
 

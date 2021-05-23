@@ -23,14 +23,6 @@ export default {
         {
           icon: 'home',
           text: 'Главная'
-        },
-        {
-          icon: 'whatshot',
-          text: 'Trending'
-        },
-        {
-          icon: 'subscriptions',
-          text: 'Subscriptions'
         }
       ]
     }
