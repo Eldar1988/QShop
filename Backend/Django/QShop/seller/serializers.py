@@ -1,16 +1,8 @@
 from rest_framework import serializers
-from .models import Seller, SellerShop, Tariff
-
-
-class TariffSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Tariff
-        fields = ('id', 'title', 'description', 'amount')
+from .models import Seller, SellerShop
 
 
 class SellerShopSerializer(serializers.ModelSerializer):
-    tariff = TariffSerializer(many=False, read_only=True)
 
     class Meta:
         model = SellerShop

@@ -6,11 +6,12 @@
         <!--        Avatar-->
         <div class="q-mx-auto">
           <q-avatar size="150px">
-            <q-img src="https://cdn.quasar.dev/img/avatar4.jpg">
+            <q-img v-if="seller.avatar" :src="seller.avatar">
               <template v-slot:loading>
                 <q-skeleton class="fit"/>
               </template>
             </q-img>
+            <q-icon v-else name="person" color="grey-7" />
           </q-avatar>
         </div>
       </div>
@@ -22,12 +23,18 @@
 <script>
 import BaseBreadcumps from 'components/base-breadcumps'
 import ProfileInfoTabs from 'components/profile/profile-info-tabs'
+import { mapState } from 'vuex'
+import currencyKZTFormatter from 'src/filters/currency-kzt'
 
 export default {
   name: 'Profile',
   components: {
     ProfileInfoTabs,
     BaseBreadcumps
+  },
+  filters: { currencyKZTFormatter },
+  computed: {
+    ...mapState('user', ['seller'])
   },
   beforeCreate () {
     if (!localStorage.getItem('uid')) {

@@ -8,7 +8,17 @@
         </q-item-section>
         <q-item-section>
           <q-item-label lines="1">Имя</q-item-label>
-          <q-item-label caption>Хайбулов Эльдар Фаритович Кувцфвцс фцвцфвфц</q-item-label>
+          <q-item-label caption>
+            <q-input
+              v-model="seller.name"
+              :disable="nameInputDisable"
+              borderless dense
+              maxlength="255"
+              class=""
+              style="max-height: 30px; margin-top: -10px"
+              @click="nameInputDisable = !nameInputDisable"
+            />
+          </q-item-label>
         </q-item-section>
         <q-item-section side>
           <q-btn
@@ -28,7 +38,7 @@
         </q-item-section>
         <q-item-section>
           <q-item-label lines="1">Номер телефона</q-item-label>
-          <q-item-label caption>+7 707 855 3710</q-item-label>
+          <q-item-label caption>+7 {{ seller.phone }}</q-item-label>
         </q-item-section>
         <q-item-section side>
           <q-btn
@@ -48,7 +58,7 @@
         </q-item-section>
         <q-item-section>
           <q-item-label lines="1">Email</q-item-label>
-          <q-item-label caption>TEst@mail.com</q-item-label>
+          <q-item-label caption>{{ seller.email }}</q-item-label>
         </q-item-section>
         <q-item-section side>
           <q-btn
@@ -66,8 +76,19 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
-  name: 'profile-info-tab-panel'
+  name: 'profile-info-tab-panel',
+  computed: {
+    ...mapState('user', ['seller'])
+  },
+  data () {
+    return {
+      nameInputDisable: false,
+      name: this.seller.name
+    }
+  }
 }
 </script>
 

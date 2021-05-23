@@ -2,11 +2,15 @@
   <div class="profile">
     <q-btn round flat>
       <q-avatar size="26px">
-        <img src="https://cdn.quasar.dev/img/boy-avatar.png">
+        <img v-if="seller.avatar" :src="seller.avatar">
+        <q-icon v-else name="person" color="grey-7"/>
       </q-avatar>
       <q-tooltip>Профиль</q-tooltip>
-      <q-menu max-width="100%" style="min-width: 500px !important"
-              content-style="width: 300px; max-width: 70%; margin: auto" fit>
+      <q-menu
+        max-width="100%" style="min-width: 500px !important"
+        content-style="width: 300px; max-width: 70%; margin: auto"
+        fit
+      >
         <div class="q-pa-sm">
           <div class="col-6">
             <div class="q-mt-md">
@@ -15,24 +19,43 @@
           <div class="column flex justify-center full-width text-center">
             <!--            Profile-->
             <q-avatar size="72px" class="q-mx-auto">
-              <img src="https://cdn.quasar.dev/img/avatar4.jpg">
+              <img v-if="seller.avatar" :src="seller.avatar">
+              <q-icon v-else name="person" color="grey-7"/>
             </q-avatar>
-            <div class="q-mt-md q-mb-xs text-center text-bold">Эльдар Хайбулов</div>
+            <div class="q-mt-md q-mb-xs text-center text-bold">{{ seller.name }}</div>
             <!--            List-->
             <q-list separator padding class="rounded-borders text-primary text-left q-mt-md">
-              <q-separator />
+              <q-separator/>
               <q-item
                 clickable
                 v-ripple
-                to="/profile"
+                to="/profile/info"
               >
                 <q-item-section>Профиль</q-item-section>
               </q-item>
               <q-item
                 clickable
                 v-ripple
+                to="/profile/balance"
               >
-                <q-item-section>Баланс</q-item-section>
+                <q-item-section>Баланс: <span class="text-bold">{{ seller.balance|currencyKZTFormatter }}</span>
+                </q-item-section>
+                <q-item-section>
+                  <q-btn
+                    label="Пополнить"
+                    no-caps
+                    size="sm"
+                    unelevated
+                    color="primary"
+                  />
+                </q-item-section>
+              </q-item>
+              <q-item
+                clickable
+                v-ripple
+                to="/profile/notifications"
+              >
+                <q-item-section>Уведомления</q-item-section>
               </q-item>
             </q-list>
             <!--            Footer-->
@@ -46,6 +69,7 @@
                 no-caps
                 unelevated
                 size="sm"
+                icon-right="logout"
                 v-close-popup
               />
             </div>
@@ -59,10 +83,16 @@
 
 <script>
 import BaseThemeToggle from 'components/base-theme-toggle'
+import { mapState } from 'vuex'
+import currencyKZTFormatter from 'src/filters/currency-kzt'
 
 export default {
-  name: 'profile',
-  components: { BaseThemeToggle }
+  name: 'right-panel-profile',
+  components: { BaseThemeToggle },
+  filters: { currencyKZTFormatter },
+  computed: {
+    ...mapState('user', ['seller'])
+  }
 }
 </script>
 
