@@ -9,7 +9,7 @@
         </div>
         <div class="q-mt-sm text-subtitle1">
           Текущий тариф:
-          <span class="text-bold text-warning">{{ seller.tariff|currencyKZTFormatter }}/день</span>
+          <span class="text-bold">{{ seller.tariff|currencyKZTFormatter }}/день</span>
         </div>
         <div class="text-grey-7 q-mt-md">
           Тариф напрямую зависит от количества магазинов. Оплата за каждый магазин 130 тенге/день

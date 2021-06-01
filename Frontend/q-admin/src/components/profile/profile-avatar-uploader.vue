@@ -1,7 +1,7 @@
 <template>
   <q-uploader
     style="max-width: 300px"
-    :url="`${this.$store.state.serverURL}/seller/update_seller_avatar/${seller.uid}/`"
+    :url="`${this.$store.state.serverURL}/seller/update_seller/${seller.uid}/`"
     label="Загрузите фото"
     method="PATCH"
     field-name="avatar"
@@ -24,7 +24,8 @@ export default {
     async rejected () {
       const vm = this
       await vm.loadSeller(vm.seller.uid)
-      notifier('Фото загружено')
+      notifier('Фото загружено', 'positive')
+      this.$emit('closeDialog')
     }
   }
 }

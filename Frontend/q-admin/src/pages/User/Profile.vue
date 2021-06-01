@@ -23,7 +23,7 @@
       <profile-info-tabs class="q-mt-xl"/>
     </section>
     <q-dialog v-model="avatarUploaderDialog">
-      <profile-avatar-uploader />
+      <profile-avatar-uploader @closeDialog="avatarUploaderDialog = false"/>
     </q-dialog>
   </q-page>
 </template>

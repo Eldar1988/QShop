@@ -9,7 +9,7 @@ DEBUG = True
 
 SHOP_UTILS = utils
 
-ALLOWED_HOSTS = ['192.168.0.156', '192.168.0.199']
+ALLOWED_HOSTS = ['192.168.0.155', '192.168.0.199']
 
 INSTALLED_APPS = [
     'django.contrib.admin',

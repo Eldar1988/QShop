@@ -27,8 +27,8 @@ class Seller(models.Model):
 
 
 class SellerShop(models.Model):
-    uid = models.CharField(max_length=255, null=True, blank=True)
-    user = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name='shops')
+    uid = models.CharField(max_length=255, null=True, blank=True, db_index=True)
+    seller = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name='shops')
     title = models.CharField(max_length=255, db_index=True)
     description = models.TextField()
     active = models.BooleanField(default=True)
@@ -43,6 +43,22 @@ class SellerShop(models.Model):
 
     class Meta:
         ordering = ('-register_date',)
+
+
+class SellerNotification(models.Model):
+    seller = models.ForeignKey(Seller, on_delete=models.SET_NULL, null=True, blank=True, related_name='notifications')
+    title = models.CharField(max_length=255, db_index=True)
+    text = models.TextField()
+    personal = models.BooleanField(default=False)
+    date = models.DateTimeField(auto_now_add=True)
+    update = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ('-date',)
+
 
 
 # class SellerShopSettings(models.Model):
