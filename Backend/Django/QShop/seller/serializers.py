@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Seller, SellerShop
+from .models import Seller, SellerShop, SellerNotification
 
 
 class SellerShopSerializer(serializers.ModelSerializer):
@@ -22,3 +22,10 @@ class ShopListSerializer(serializers.ModelSerializer):
     class Meta:
         model = SellerShop
         fields = ('id', 'title', 'logo', 'url')
+
+
+class SellerNotificationsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = SellerNotification
+        fields = ('id', 'title', 'text', 'date')

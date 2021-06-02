@@ -13,7 +13,7 @@ class Seller(models.Model):
     balance = models.DecimalField(max_digits=12, decimal_places=2, default=2000)
     mailing = models.BooleanField(default=False)
     avatar = ThumbnailerImageField(upload_to=utils.path_and_rename('shop/products/miniatures/', 'miniature'),
-                                      null=True, blank=True, resize_source={'size': (300, 300), 'crop': 'scale'})
+                                   null=True, blank=True, resize_source={'size': (300, 300), 'crop': 'scale'})
     register_date = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
 
@@ -58,8 +58,6 @@ class SellerNotification(models.Model):
 
     class Meta:
         ordering = ('-date',)
-
-
 
 # class SellerShopSettings(models.Model):
 #     seller_shop = models.ForeignKey(SellerShop, on_delete=models.CASCADE, related_name='settings')

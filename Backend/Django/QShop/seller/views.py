@@ -1,8 +1,8 @@
 from rest_framework import generics
 from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
 
-from .models import Seller, SellerShop
-from .serializers import SellerSerializer, SellerShopSerializer
+from .models import Seller, SellerShop, SellerNotification
+from .serializers import SellerSerializer, SellerShopSerializer, SellerNotificationsSerializer
 
 
 class SellerDetailView(generics.RetrieveAPIView):
@@ -24,3 +24,9 @@ class UpdateSellerView(generics.UpdateAPIView):
     queryset = Seller.objects.all()
     serializer_class = SellerSerializer
     lookup_field = 'uid'
+
+
+class NotificationsView(generics.ListAPIView):
+    """Seller notifications"""
+    queryset = SellerNotification.objects.all()[:20]
+    serializer_class = SellerNotificationsSerializer

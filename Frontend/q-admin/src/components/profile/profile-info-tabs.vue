@@ -28,6 +28,10 @@
       <q-tab-panel name="balance">
         <profile-balance-tab-panel/>
       </q-tab-panel>
+
+      <q-tab-panel name="notifications">
+        <profile-notifications-tab-panel />
+      </q-tab-panel>
     </q-tab-panels>
   </div>
 </template>
@@ -35,10 +39,12 @@
 <script>
 import ProfileInfoTabPanel from 'components/profile/profile-info-tab-panel'
 import ProfileBalanceTabPanel from 'components/profile/profile-balance-tab-panel'
+import ProfileNotificationsTabPanel from 'components/profile/profile-notifications-tab-panel'
 
 export default {
   name: 'profile-info-tabs',
   components: {
+    ProfileNotificationsTabPanel,
     ProfileBalanceTabPanel,
     ProfileInfoTabPanel
   },

@@ -64,3 +64,12 @@ export async function updateSeller ({ commit }, payload) {
     utils.notifier(e.message)
   }
 }
+
+export async function loadSellerNotifications ({ commit }) {
+  try {
+    await axios.get(`${this.state.serverURL}/seller/notifications/`)
+      .then(response => commit('mutationsSellerNotifications', response.data.results))
+  } catch (e) {
+    utils.notifier(e.message)
+  }
+}

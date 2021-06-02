@@ -1,5 +1,6 @@
 export default function () {
   return {
-    seller: null
+    seller: null,
+    notifications: []
   }
 }
