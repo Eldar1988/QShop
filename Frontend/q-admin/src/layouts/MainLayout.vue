@@ -1,6 +1,6 @@
 <template>
-  <q-layout view="hHh lpR fFf" class="">
-    <q-header class="q-py-xs bg-transparent text-grey-8 shadow-3" height-hint="58">
+  <q-layout view="hHh lpR fFf" class="main-layout">
+    <q-header class="q-py-xs header-bg shadow-3" height-hint="58">
       <q-toolbar>
         <q-btn
           flat
@@ -17,7 +17,6 @@
         <right-panel/>
       </q-toolbar>
     </q-header>
-
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
@@ -26,17 +25,18 @@
     >
       <base-drawer-content/>
     </q-drawer>
-
     <q-page-container>
-      <div class="page-container q-bg">
-        <transition
-          appear
-          enter-active-class="animated fadeIn"
-          leave-active-class="animated fadeOut"
-        >
-        <router-view/>
-        </transition>
-      </div>
+      <q-scroll-area style="height: calc(100vh - 58px)">
+        <div class="page-container q-bg">
+          <transition
+            appear
+            enter-active-class="animated fadeIn"
+            leave-active-class="animated fadeOut"
+          >
+            <router-view/>
+          </transition>
+        </div>
+      </q-scroll-area>
     </q-page-container>
   </q-layout>
 </template>
@@ -64,6 +64,12 @@ export default {
 </script>
 
 <style lang="sass">
+.header-bg
+  background: rgba(0,0,0,.5)
+.main-layout
+  max-height: 100vh
+  overflow: hidden
+
 .YL
   &__toolbar-input-container
     min-width: 100px

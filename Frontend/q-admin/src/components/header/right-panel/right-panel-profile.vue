@@ -70,6 +70,7 @@
                 unelevated
                 size="sm"
                 icon-right="logout"
+                @click="logout"
                 v-close-popup
               />
             </div>
@@ -83,7 +84,7 @@
 
 <script>
 import BaseThemeToggle from 'components/base-theme-toggle'
-import { mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import currencyKZTFormatter from 'src/filters/currency-kzt'
 
 export default {
@@ -92,6 +93,9 @@ export default {
   filters: { currencyKZTFormatter },
   computed: {
     ...mapState('user', ['seller'])
+  },
+  methods: {
+    ...mapActions('user', ['logout'])
   }
 }
 </script>

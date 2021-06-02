@@ -2,7 +2,7 @@ from rest_framework import generics
 from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
 
 from .models import Seller, SellerShop, SellerNotification
-from .serializers import SellerSerializer, SellerShopSerializer, SellerNotificationsSerializer
+from .serializers import SellerSerializer, SellerShopSerializer, SellerNotificationsSerializer, SellerShopListSerializer
 
 
 class SellerDetailView(generics.RetrieveAPIView):
@@ -30,3 +30,12 @@ class NotificationsView(generics.ListAPIView):
     """Seller notifications"""
     queryset = SellerNotification.objects.all()[:20]
     serializer_class = SellerNotificationsSerializer
+
+
+class SellerShopListView(generics.ListAPIView):
+    """Seller shops"""
+    serializer_class = SellerShopListSerializer
+
+    def get_queryset(self):
+        shops = SellerShop.objects.filter(uid=self.request.GET.get('uid'))
+        return shops

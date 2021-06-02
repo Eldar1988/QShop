@@ -50,6 +50,14 @@ export async function loadSeller ({ commit }, uid) {
   }
 }
 
+export function logout ({ commit }) {
+  utils.notifier('Вы вышли из аккаунта. Для продолжения работы необходимо войти.')
+  commit('mutationsSeller', null)
+  this.$router.replace('/login').then(() => {
+    localStorage.setItem('uid', '')
+  })
+}
+
 export async function updateSeller ({ commit }, payload) {
   try {
     await axios.patch(`${this.state.serverURL}/seller/update_seller/${payload.uid}/`, {

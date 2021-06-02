@@ -23,6 +23,7 @@
           label="Отмена"
           unelevated no-caps
           color="grey-7"
+          v-close-popup
         />
         <q-btn
           label="Изменить"

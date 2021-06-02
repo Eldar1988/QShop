@@ -17,7 +17,7 @@ class SellerSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ShopListSerializer(serializers.ModelSerializer):
+class SellerShopListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SellerShop

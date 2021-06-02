@@ -10,8 +10,8 @@
         </q-item-section>
         <q-item-section>
           <q-item-label lines="1" class="text-bold">{{ notification.title }}</q-item-label>
-          <q-item-label caption>{{ notification.text }}</q-item-label>
-          <small class="q-pt-md">{{ notification.date|dateFormatter }}</small>
+          <q-item-label>{{ notification.text }}</q-item-label>
+          <q-item-label caption>{{ notification.date|dateFormatter }}</q-item-label>
         </q-item-section>
       </q-item>
     </q-list>

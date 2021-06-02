@@ -7,10 +7,8 @@
           <q-avatar icon="person" color="primary" text-color="white"/>
         </q-item-section>
         <q-item-section>
-          <q-item-label lines="1">Имя</q-item-label>
-          <q-item-label caption>
-            {{ seller.name || 'Anonim' }}
-          </q-item-label>
+          <q-item-label caption>Имя</q-item-label>
+          <q-item-label>{{ seller.name || 'Anonim' }}</q-item-label>
         </q-item-section>
         <q-item-section side>
           <q-btn
@@ -30,8 +28,8 @@
           <q-avatar icon="phone" color="primary" text-color="white"/>
         </q-item-section>
         <q-item-section>
-          <q-item-label lines="1">Номер телефона</q-item-label>
-          <q-item-label caption>+7 {{ seller.phone }}</q-item-label>
+          <q-item-label caption>Номер телефона</q-item-label>
+          <q-item-label>+7 {{ seller.phone }}</q-item-label>
         </q-item-section>
         <q-item-section side>
           <q-btn
@@ -51,8 +49,8 @@
           <q-avatar icon="email" color="primary" text-color="white"/>
         </q-item-section>
         <q-item-section>
-          <q-item-label lines="1">E-mail</q-item-label>
-          <q-item-label caption>{{ seller.email }}</q-item-label>
+          <q-item-label caption>E-mail</q-item-label>
+          <q-item-label>{{ seller.email }}</q-item-label>
         </q-item-section>
       </q-item>
     </q-list>
@@ -80,7 +78,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>
